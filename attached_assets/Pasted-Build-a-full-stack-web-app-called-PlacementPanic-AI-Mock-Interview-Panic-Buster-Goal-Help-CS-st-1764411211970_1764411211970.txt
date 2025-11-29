@@ -1,0 +1,107 @@
+Build a full‑stack web app called PlacementPanic – AI Mock Interview Panic Buster.
+
+Goal: Help CS students who panic in interviews by giving them realistic mock interviews, performance analytics, and AI‑style feedback.
+
+Tech stack:
+
+Frontend: HTML, CSS, JavaScript (no React)
+
+Backend: Node.js, Express
+
+Database: MongoDB (use Mongoose)
+
+Auth: JWT + bcrypt password hashing
+
+Core features (MVP, all must be implemented):
+
+User Auth & Profiles
+
+Signup/Login with email + password
+
+Store name, college, year, target role (SDE, Web Dev, etc.)
+
+Protected routes using JWT
+
+Question Bank & Categories
+
+Collections for questions with fields: text, category (DSA, Web, Java, System Design, HR), difficulty (easy/medium/hard)
+
+API to get random questions by category + difficulty
+
+Mock Interview Session
+
+Frontend page: “Start Interview” where user selects: category, difficulty, duration (5/10/15 mins), camera on/off (UI only, no actual video recording required for now)
+
+Show one question at a time, with countdown timer and “Next question” button
+
+Track questions answered, time spent, and a self‑rating slider (1–5) per question
+
+Analytics & Panic Metrics
+
+After each session, compute:
+
+Overall score (avg of self‑ratings)
+
+Difficulty mix, number of questions answered, total duration
+
+Store each session in MongoDB linked to user
+
+Dashboard page:
+
+Total interviews done
+
+Average score
+
+Best score
+
+Simple “panic reduction index” = min(5 × number_of_interviews, 90)
+
+Feedback Generator (no paid AI)
+
+On backend, write a pure JS function that generates textual feedback based on metrics:
+
+High score → positive reinforcement
+
+Low score or few questions → suggest more practice
+
+Show 3 strengths and 3 improvement points
+
+Return this feedback in JSON and render it nicely on frontend.
+
+API Design
+
+/api/auth/signup, /api/auth/login
+
+/api/questions/random?category=&difficulty=&count=
+
+/api/interviews (POST to save a completed session)
+
+/api/interviews/stats (GET dashboard metrics)
+
+Frontend Pages (plain HTML/CSS/JS):
+
+Landing page explaining problem: “92% students fail due to panic, not skills” and CTA “Start Panic Training”
+
+Login/Signup page
+
+Dashboard with stats cards + “Start Interview” button
+
+Live Interview screen with: current question, timer, controls, and basic fake “confidence meter” bar updated by JS
+
+Post‑interview Report page showing metrics and generated feedback.
+
+Project structure required:
+
+server/ folder: index.js, routes/, models/, controllers/, middleware/auth.js, .env.example
+
+public/ folder for static frontend: index.html, login.html, dashboard.html, interview.html, report.html, styles.css, main.js
+
+Use express.static to serve frontend from public/.
+
+Extra requirements:
+
+Use environment variables for DB URL and JWT secret
+
+Include a README.md with clear steps: how to install, run backend, and open frontend
+
+Seed script to insert at least 40–50 interview questions into MongoDB.
